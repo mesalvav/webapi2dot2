@@ -26,6 +26,16 @@ namespace webapi2dot2.Models
             return employee;
         }
 
+        public Employee Delete(int id)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == id);
+            if (employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
+            return employee;
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return _employeeList;
@@ -34,6 +44,21 @@ namespace webapi2dot2.Models
         public Employee GetEmployee(int Id)
         {
             return this._employeeList.FirstOrDefault(e => e.Id == Id);
+        }
+
+        public Employee Update(Employee employeeChanges)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == employeeChanges.Id);
+            if (employee != null)
+            {
+                employee.Name = employeeChanges.Name;
+                employee.Department = employeeChanges.Department;
+                employee.Email = employeeChanges.Email;
+
+                _employeeList.Remove(employeeChanges);
+                _employeeList.Add(employee);
+            }
+            return employee;
         }
     }
 }
