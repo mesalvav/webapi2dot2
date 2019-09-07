@@ -7,5 +7,6 @@ namespace webapi2dot2.Models
     {
         Employee GetEmployee(int Id);
         IEnumerable<Employee> GetAllEmployee();
+        Employee Add(Employee employee);
     }
 }

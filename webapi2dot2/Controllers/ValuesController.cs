@@ -42,8 +42,14 @@ namespace webapi2dot2.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Employee> Post([FromBody] Employee employeeValue)
         {
+            Employee newEmployee = _employeeRepository.Add(employeeValue);
+            if (newEmployee == null)
+            {
+                return NotFound();
+            }
+            return newEmployee;
         }
 
         // PUT api/values/5
