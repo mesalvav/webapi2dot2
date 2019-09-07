@@ -19,17 +19,25 @@ namespace webapi2dot2.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult< IEnumerable<Employee>> Get()
         {
-            return new string[] { "value1", "value2" };
+             IEnumerable <Employee> allEmployees = _employeeRepository.GetAllEmployee();
+
+            ActionResult<IEnumerable<Employee>> result = new ActionResult<IEnumerable<Employee>>(allEmployees);
+            
+            return result;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Employee> Get(int id)
         {
-            // return "value";
-            return _employeeRepository.GetEmployee(id).Name;
+            Employee model = _employeeRepository.GetEmployee(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return model;
         }
 
         // POST api/values

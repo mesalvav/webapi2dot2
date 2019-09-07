@@ -27,7 +27,10 @@ namespace webapi2dot2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                // .AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
